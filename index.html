@@ -10,26 +10,30 @@
 * { margin:0; padding:0; box-sizing:border-box; }
 body { font-family:'Segoe UI',system-ui,sans-serif; background:#f0f4f8; color:#1a2a3a; height:100vh; display:flex; flex-direction:column; }
 
-header { background:#1a5276; color:#fff; padding:10px 20px; display:flex; align-items:center; justify-content:space-between; gap:12px; flex-shrink:0; box-shadow:0 2px 8px rgba(0,0,0,0.2); }
-.header-left { display:flex; align-items:center; gap:12px; }
-.header-icon { width:34px; height:34px; background:rgba(255,255,255,0.15); border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:17px; }
-header h1 { font-size:15px; font-weight:600; }
-header p { font-size:11px; opacity:0.75; margin-top:1px; }
-.header-right { display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
-.stat-pill { background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.2); border-radius:20px; padding:3px 12px; font-size:11px; display:flex; align-items:center; gap:5px; }
-.btn-header { padding:6px 14px; border-radius:8px; border:none; font-size:12px; font-weight:600; cursor:pointer; display:flex; align-items:center; gap:5px; transition:all 0.15s; }
+/* HEADER */
+header { background:#1a5276; color:#fff; padding:8px 14px; display:flex; align-items:center; justify-content:space-between; gap:8px; flex-shrink:0; box-shadow:0 2px 8px rgba(0,0,0,0.2); }
+.header-left { display:flex; align-items:center; gap:10px; min-width:0; }
+.header-icon { width:32px; height:32px; border-radius:8px; object-fit:contain; background:#fff; padding:2px; flex-shrink:0; }
+header h1 { font-size:14px; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+header p { font-size:10px; opacity:0.75; margin-top:1px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.header-right { display:flex; align-items:center; gap:6px; flex-shrink:0; }
+.stat-pill { background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.2); border-radius:20px; padding:3px 10px; font-size:11px; display:flex; align-items:center; gap:4px; white-space:nowrap; }
+.btn-header { padding:6px 12px; border-radius:8px; border:none; font-size:12px; font-weight:600; cursor:pointer; display:flex; align-items:center; gap:4px; transition:all 0.15s; white-space:nowrap; text-decoration:none; }
 .btn-refresh { background:#fff; color:#1a5276; }
 .btn-refresh:hover { background:#e8f0f8; }
-.btn-cetak { background:rgba(255,255,255,0.15); color:#fff; border:1px solid rgba(255,255,255,0.3); }
-.btn-cetak:hover { background:rgba(255,255,255,0.25); }
-.layer-toggle { display:flex; gap:4px; background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.2); border-radius:8px; padding:3px; }
-.layer-btn { padding:3px 10px; border-radius:6px; border:none; font-size:11px; cursor:pointer; color:rgba(255,255,255,0.7); background:transparent; transition:all 0.15s; font-weight:500; }
+.layer-toggle { display:flex; gap:3px; background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.2); border-radius:8px; padding:3px; }
+.layer-btn { padding:3px 8px; border-radius:6px; border:none; font-size:11px; cursor:pointer; color:rgba(255,255,255,0.7); background:transparent; transition:all 0.15s; font-weight:500; }
 .layer-btn.active { background:#fff; color:#1a5276; font-weight:700; }
-.sidebar.hidden { display:none; }
-.btn-toggle-sidebar { position:absolute; top:20%; left:10px; z-index:1000; background:#1a5276; color:#fff; border:none; border-radius:8px; padding:7px 10px; cursor:pointer; font-size:14px; box-shadow:0 2px 8px rgba(0,0,0,0.3); transform:translateY(-50%);}
 
-.main { display:flex; flex:1; overflow:hidden; }
-.sidebar { width:320px; background:#fff; border-right:1px solid #d0dce8; display:flex; flex-direction:column; flex-shrink:0; overflow:hidden; }
+/* HAMBURGER - mobile only */
+.btn-hamburger { display:none; background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.3); color:#fff; border-radius:8px; padding:6px 10px; font-size:16px; cursor:pointer; }
+
+/* MAIN */
+.main { display:flex; flex:1; overflow:hidden; position:relative; }
+
+/* SIDEBAR */
+.sidebar { width:320px; background:#fff; border-right:1px solid #d0dce8; display:flex; flex-direction:column; flex-shrink:0; overflow:hidden; transition:all 0.3s; }
+.sidebar.hidden { display:none; }
 .sidebar-search { padding:10px; border-bottom:1px solid #e0ecf8; }
 .search-input { width:100%; padding:7px 11px; border:1.5px solid #b8d0e8; border-radius:8px; font-size:13px; outline:none; background:#f5f9ff; color:#1a2a3a; transition:border-color 0.2s; }
 .search-input:focus { border-color:#1a5276; }
@@ -41,42 +45,108 @@ header p { font-size:11px; opacity:0.75; margin-top:1px; }
 .sidebar-list::-webkit-scrollbar-thumb { background:#b8d0e8; border-radius:2px; }
 .difabel-card { padding:9px 11px; border-radius:8px; border:1.5px solid #e0ecf8; margin-bottom:5px; cursor:pointer; transition:all 0.15s; background:#fff; }
 .difabel-card:hover,.difabel-card.selected { border-color:#1a5276; background:#f0f6ff; }
-.card-top { display:flex; align-items:center; justify-content:space-between; margin-bottom:4px; }
+.card-top { display:flex; align-items:center; justify-content:space-between; margin-bottom:4px; gap:6px; }
 .card-nama { font-size:12.5px; font-weight:600; color:#1a2a3a; flex:1; min-width:0; word-break:break-word; }
-.jenis-badge { font-size:10px; padding:2px 7px; border-radius:10px; font-weight:500; white-space:nowrap; flex-shrink:0;}
+.jenis-badge { font-size:10px; padding:2px 7px; border-radius:10px; font-weight:500; white-space:nowrap; flex-shrink:0; }
 .card-info { font-size:11px; color:#4a6a8a; }
 
-#map { width:100%; height:100%; min-height:600px; z-index:0; }
+/* MAP AREA */
+.map-wrap { position:relative; flex:1; }
+#map { width:100%; height:100%; min-height:400px; z-index:0; }
 
-.popup-wrap { min-width:200px; }
+/* TOGGLE SIDEBAR BUTTON */
+.btn-toggle-sidebar { position:absolute; top:50%; left:10px; transform:translateY(-50%); z-index:1000; background:#1a5276; color:#fff; border:none; border-radius:8px; padding:7px 10px; cursor:pointer; font-size:14px; box-shadow:0 2px 8px rgba(0,0,0,0.3); }
+
+/* MOBILE DRAWER OVERLAY */
+.sidebar-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.4); z-index:1500; }
+.sidebar-overlay.show { display:block; }
+
+/* POPUP */
+.popup-wrap { min-width:190px; }
 .popup-header { background:#1a5276; color:#fff; padding:9px 13px; margin:-10px -14px 9px; border-radius:4px 4px 0 0; display:flex; align-items:center; gap:8px; }
-.popup-avatar { width:30px; height:30px; background:rgba(255,255,255,0.2); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:14px; flex-shrink:0; }
-.popup-nama { font-size:13px; font-weight:600; }
-.popup-sub { font-size:11px; opacity:0.8; }
-.popup-row { display:flex; justify-content:space-between; align-items:center; padding:5px 0; border-bottom:1px solid #e0ecf8; font-size:12px; }
+.popup-avatar { width:28px; height:28px; background:rgba(255,255,255,0.2); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:13px; flex-shrink:0; }
+.popup-nama { font-size:12px; font-weight:600; }
+.popup-sub { font-size:10px; opacity:0.8; }
+.popup-row { display:flex; justify-content:space-between; align-items:center; padding:4px 0; border-bottom:1px solid #e0ecf8; font-size:11px; }
 .popup-row:last-child { border-bottom:none; }
 .popup-label { color:#5a7a9a; }
-.popup-val { font-weight:500; color:#1a2a3a; max-width:130px; text-align:right; }
+.popup-val { font-weight:500; color:#1a2a3a; max-width:120px; text-align:right; }
 
-.legend { position:absolute; bottom:28px; right:10px; background:#fff; border:1px solid #d0dce8; border-radius:8px; padding:9px 13px; z-index:1000; font-size:12px; box-shadow:0 2px 8px rgba(0,0,0,0.1); }
-.legend-title { font-weight:600; font-size:10px; color:#1a5276; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:7px; }
-.legend-item { display:flex; align-items:center; gap:7px; margin-bottom:4px; color:#3a5a7a; font-size:11px; }
-.legend-dot { width:11px; height:11px; border-radius:50%; border:2px solid rgba(0,0,0,0.12); flex-shrink:0; }
+/* LEGEND */
+.legend { position:absolute; bottom:28px; right:10px; background:#fff; border:1px solid #d0dce8; border-radius:8px; padding:8px 12px; z-index:1000; font-size:11px; box-shadow:0 2px 8px rgba(0,0,0,0.1); max-width:180px; }
+.legend-title { font-weight:600; font-size:10px; color:#1a5276; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:6px; }
+.legend-item { display:flex; align-items:center; gap:6px; margin-bottom:3px; color:#3a5a7a; font-size:10px; }
+.legend-dot { width:10px; height:10px; border-radius:50%; border:2px solid rgba(0,0,0,0.12); flex-shrink:0; }
 
 .toast { position:fixed; bottom:20px; left:50%; transform:translateX(-50%) translateY(80px); background:#1a2a3a; color:#fff; padding:10px 20px; border-radius:20px; font-size:13px; z-index:3000; transition:transform 0.3s; pointer-events:none; }
 .toast.show { transform:translateX(-50%) translateY(0); }
 .empty-state { text-align:center; padding:36px 20px; color:#7a9ab8; font-size:13px; }
 .empty-state .emoji { font-size:30px; margin-bottom:8px; }
+
+/* ── RESPONSIVE MOBILE ── */
+@media (max-width: 640px) {
+  header { padding:8px 10px; }
+  header h1 { font-size:13px; }
+  header p { display:none; }
+  .header-right .layer-toggle { display:none; }
+  .header-right .stat-pill { display:none; }
+  .btn-header span { display:none; }
+  .btn-hamburger { display:flex; align-items:center; justify-content:center; }
+
+  .sidebar {
+    position:fixed;
+    top:0; left:0; bottom:0;
+    width:85vw;
+    max-width:320px;
+    z-index:2000;
+    transform:translateX(-100%);
+    transition:transform 0.3s;
+    display:flex !important;
+  }
+  .sidebar.mobile-open {
+    transform:translateX(0);
+  }
+  .sidebar-overlay.show { display:block; }
+
+  .btn-toggle-sidebar { display:none; }
+
+  /* Layer toggle pindah ke dalam peta */
+  .mobile-layer-bar { display:flex !important; }
+
+  .legend { bottom:70px; right:8px; max-width:150px; }
+}
+
+@media (min-width: 641px) {
+  .btn-hamburger { display:none; }
+  .mobile-layer-bar { display:none !important; }
+  .sidebar-overlay { display:none !important; }
+}
+
+/* Mobile layer bar di dalam peta */
+.mobile-layer-bar {
+  display:none;
+  position:absolute;
+  top:10px;
+  left:50%;
+  transform:translateX(-50%);
+  z-index:1000;
+  background:rgba(26,82,118,0.92);
+  border-radius:20px;
+  padding:4px 6px;
+  gap:4px;
+}
+.mobile-layer-bar .layer-btn { color:rgba(255,255,255,0.7); font-size:11px; padding:3px 10px; }
+.mobile-layer-bar .layer-btn.active { background:#fff; color:#1a5276; }
 </style>
 </head>
 <body>
 
 <header>
   <div class="header-left">
-    <img src="logo pinilih.jpg" style="width:34px;height:34px;border-radius:8px;object-fit:contain;background:#fff;padding:2px;">
+    <img src="logo pinilih.jpg" class="header-icon" alt="Logo Pinilih">
     <div>
       <h1>Peta Difabel Dusun Gubug, Sedayu</h1>
-      <p>Sistem Pendataan Penyandang Disabilitas — KKN ISL UKDW 2026 KELOMPOK GUBUG</p>
+      <p>Sistem Pendataan Penyandang Disabilitas — KKN ISL UKDW 2026</p>
     </div>
   </div>
   <div class="header-right">
@@ -86,14 +156,22 @@ header p { font-size:11px; opacity:0.75; margin-top:1px; }
       <button class="layer-btn" data-layer="hybrid">Hybrid</button>
     </div>
     <div class="stat-pill">♿ Total: <strong><span id="count-total">0</span></strong> orang</div>
-    <button class="btn-header btn-refresh" onclick="loadDariSheets()">🔄 Refresh Data</button>
-    <a href="https://docs.google.com/spreadsheets/d/1JxshA3egPzL6bh_o235EL0kItGjvJZA0E6aKnrR_bLA/edit?usp=sharing" target="_blank" class="btn-header btn-refresh"  style="text-decoration:none;">📝 Update Data</a>
-    
+    <button class="btn-header btn-refresh" onclick="loadDariSheets()">🔄 <span>Refresh Data</span></button>
+    <a href="https://docs.google.com/spreadsheets/d/1JxshA3egPzL6bh_o235EL0kItGjvJZA0E6aKnrR_bLA/edit?usp=sharing" target="_blank" class="btn-header btn-refresh">📝 <span>Update Data</span></a>
+    <button class="btn-hamburger" onclick="toggleMobileSidebar()">☰</button>
   </div>
 </header>
 
 <div class="main">
-  <div class="sidebar">
+  <!-- Overlay untuk mobile -->
+  <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleMobileSidebar()"></div>
+
+  <div class="sidebar" id="sidebar">
+    <!-- Close button mobile -->
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:10px;border-bottom:1px solid #e0ecf8;">
+      <span style="font-size:13px;font-weight:600;color:#1a5276;">Daftar Difasari</span>
+      <button onclick="toggleMobileSidebar()" style="background:none;border:none;font-size:18px;cursor:pointer;color:#1a5276;line-height:1;">✕</button>
+    </div>
     <div class="sidebar-search">
       <input class="search-input" type="text" id="searchInput" placeholder="🔍  Cari nama...">
       <div class="filter-row" id="filterRow">
@@ -105,8 +183,16 @@ header p { font-size:11px; opacity:0.75; margin-top:1px; }
     </div>
   </div>
 
-  <div style="position:relative;flex:1;">
-      <button class="btn-toggle-sidebar" id="btnToggle" onclick="toggleSidebar()" title="Sembunyikan/Tampilkan Sidebar">◀</button>
+  <div class="map-wrap">
+    <button class="btn-toggle-sidebar" id="btnToggle" onclick="toggleSidebar()" title="Sembunyikan/Tampilkan Sidebar">◀</button>
+
+    <!-- Layer toggle untuk mobile -->
+    <div class="mobile-layer-bar" id="mobileLayerBar">
+      <button class="layer-btn" data-layer="osm">Peta</button>
+      <button class="layer-btn active" data-layer="satelit">Satelit</button>
+      <button class="layer-btn" data-layer="hybrid">Hybrid</button>
+    </div>
+
     <div id="map"></div>
     <div class="legend" id="legend">
       <div class="legend-title">Jenis Difabel</div>
@@ -125,18 +211,13 @@ var filterAktif = "semua";
 var searchQuery = "";
 var selectedId = null;
 var markers = {};
-
-// Warna otomatis per jenis difabel
 var warnaJenis = {};
 var palet = ["#e74c3c","#3498db","#2ecc71","#f39c12","#9b59b6","#1abc9c","#e67e22","#e91e63","#00bcd4","#8bc34a"];
 var warnaIdx = 0;
 
 function getWarnaJenis(jenis) {
   var key = jenis.toLowerCase().trim();
-  if(!warnaJenis[key]) {
-    warnaJenis[key] = palet[warnaIdx % palet.length];
-    warnaIdx++;
-  }
+  if(!warnaJenis[key]) { warnaJenis[key] = palet[warnaIdx % palet.length]; warnaIdx++; }
   return warnaJenis[key];
 }
 
@@ -153,7 +234,7 @@ function getEmoji(jenis) {
 
 // TILE LAYERS
 var tileLayers = {
-  osm: L.tileLayer("https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}", { attribution:"© Google Maps", maxZoom:20 }),
+  osm:    L.tileLayer("https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}", { attribution:"© Google Maps", maxZoom:20 }),
   satelit:L.tileLayer("https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}", { attribution:"© Google Maps", maxZoom:20 }),
   hybrid: L.tileLayer("https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}", { attribution:"© Google Maps", maxZoom:20 })
 };
@@ -163,6 +244,7 @@ tileLayers.satelit.addTo(map);
 setTimeout(function(){ map.invalidateSize(); }, 200);
 var layerAktif = "satelit";
 
+// Layer toggle — handle both desktop and mobile buttons
 document.querySelectorAll(".layer-btn").forEach(function(btn) {
   btn.addEventListener("click", function() {
     var layer = btn.dataset.layer;
@@ -171,24 +253,19 @@ document.querySelectorAll(".layer-btn").forEach(function(btn) {
     tileLayers[layer].addTo(map);
     layerAktif = layer;
     document.querySelectorAll(".layer-btn").forEach(function(b){ b.classList.remove("active"); });
-    btn.classList.add("active");
+    document.querySelectorAll("[data-layer='"+layer+"']").forEach(function(b){ b.classList.add("active"); });
   });
 });
 
 // PARSE CSV
 function parseCSV(text) {
   var lines = text.trim().split("\n");
-  var headers = lines[0].split("\t").length > 1
-    ? lines[0].split("\t")
-    : lines[0].split(",");
+  var headers = lines[0].split("\t").length > 1 ? lines[0].split("\t") : lines[0].split(",");
   headers = headers.map(function(h){ return h.trim().replace(/^"|"$/g,"").toLowerCase(); });
-
   var result = [];
   for(var i=1; i<lines.length; i++) {
     if(!lines[i].trim()) continue;
-    var cols = [];
-    var cur = "";
-    var inQuote = false;
+    var cols = []; var cur = ""; var inQuote = false;
     var sep = lines[i].indexOf("\t") >= 0 ? "\t" : ",";
     for(var c=0; c<lines[i].length; c++) {
       var ch = lines[i][c];
@@ -197,24 +274,11 @@ function parseCSV(text) {
       else { cur += ch; }
     }
     cols.push(cur.trim());
-
     var obj = {};
-    headers.forEach(function(h, idx){
-      obj[h] = (cols[idx]||"").replace(/^"|"$/g,"").trim();
-    });
-
+    headers.forEach(function(h, idx){ obj[h] = (cols[idx]||"").replace(/^"|"$/g,"").trim(); });
     if(!obj.nama) continue;
-
     var jenis = obj["jenis difabel"] || obj["jenis_difabel"] || obj["jenis"] || "-";
-
-    result.push({
-      id: parseInt(obj.id)||i,
-      nama: obj.nama||"-",
-      alamat: obj.alamat||"-",
-      jenis: jenis,
-      lat: parseFloat(obj.lat)||0,
-      lng: parseFloat(obj.lng)||0
-    });
+    result.push({ id:parseInt(obj.id)||i, nama:obj.nama||"-", alamat:obj.alamat||"-", jenis:jenis, lat:parseFloat(obj.lat)||0, lng:parseFloat(obj.lng)||0 });
   }
   return result;
 }
@@ -222,11 +286,7 @@ function parseCSV(text) {
 // MARKER
 function buatIcon(jenis) {
   var c = getWarnaJenis(jenis);
-  return L.divIcon({
-    className:"",
-    html:"<div style=\"width:16px;height:16px;border-radius:50%;background:"+c+";border:2.5px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,0.5);\"></div>",
-    iconSize:[16,16], iconAnchor:[8,8]
-  });
+  return L.divIcon({ className:"", html:"<div style=\"width:16px;height:16px;border-radius:50%;background:"+c+";border:2.5px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,0.5);\"></div>", iconSize:[16,16], iconAnchor:[8,8] });
 }
 
 function buatPopup(d) {
@@ -234,14 +294,12 @@ function buatPopup(d) {
   var gmapsUrl = "https://www.google.com/maps?q="+d.lat+","+d.lng;
   return "<div class='popup-wrap'>"
     +"<div class='popup-header'><div class='popup-avatar'>"+emoji+"</div>"
-    +"<div><div class='popup-nama'>"+d.nama+"</div>"
-    +"<div class='popup-sub'>"+d.jenis+"</div></div></div>"
+    +"<div><div class='popup-nama'>"+d.nama+"</div><div class='popup-sub'>"+d.jenis+"</div></div></div>"
     +"<div class='popup-row'><span class='popup-label'>Alamat</span><span class='popup-val'>"+d.alamat+"</span></div>"
     +"<div class='popup-row'><span class='popup-label'>Jenis Difabel</span><span class='popup-val'>"+d.jenis+"</span></div>"
     +"<div style='margin-top:8px;text-align:center'>"
     +"<a href='"+gmapsUrl+"' target='_blank' style='display:inline-block;padding:6px 14px;background:#1a5276;color:#fff;border-radius:6px;font-size:12px;text-decoration:none;font-weight:600'>📍 Buka di Google Maps</a>"
-    +"</div>"
-    +"</div>";
+    +"</div></div>";
 }
 
 function tambahMarker(d) {
@@ -260,23 +318,15 @@ function renderSidebar() {
          || d.jenis.toLowerCase().indexOf(searchQuery.toLowerCase()) >= 0;
     return f && s;
   });
-
-  if(!filtered.length) {
-    list.innerHTML = "<div class='empty-state'><div class='emoji'>🔍</div>Tidak ada data</div>";
-    return;
-  }
-
+  if(!filtered.length) { list.innerHTML = "<div class='empty-state'><div class='emoji'>🔍</div>Tidak ada data</div>"; return; }
   var html = "";
   filtered.forEach(function(d) {
     var c = getWarnaJenis(d.jenis);
     var emoji = getEmoji(d.jenis);
     html += "<div class='difabel-card"+(selectedId===d.id?" selected":"")+"' onclick='pilihDifabel("+d.id+")'>"
-      +"<div class='card-top'>"
-      +"<div class='card-nama'>"+emoji+" "+d.nama+"</div>"
-      +"<span class='jenis-badge' style='background:"+c+"20;color:"+c+";border:1px solid "+c+"40'>"+d.jenis+"</span>"
-      +"</div>"
-      +"<div class='card-info'>"+d.alamat+"</div>"
-      +"</div>";
+      +"<div class='card-top'><div class='card-nama'>"+emoji+" "+d.nama+"</div>"
+      +"<span class='jenis-badge' style='background:"+c+"20;color:"+c+";border:1px solid "+c+"40'>"+d.jenis+"</span></div>"
+      +"<div class='card-info'>"+d.alamat+"</div></div>";
   });
   list.innerHTML = html;
 }
@@ -288,22 +338,21 @@ function pilihDifabel(id) {
   map.setView([d.lat, d.lng], 18, {animate:true});
   if(markers[id]) markers[id].openPopup();
   renderSidebar();
+  // Auto close sidebar di mobile setelah pilih
+  if(window.innerWidth <= 640) toggleMobileSidebar(false);
 }
 
-// FILTER DINAMIS
+// FILTER
 function renderFilter() {
   var jenisSet = {};
   dataDifabel.forEach(function(d){ jenisSet[d.jenis] = true; });
   var jenisList = Object.keys(jenisSet);
-
-  var html = "<button class='filter-btn"+(filterAktif==="semua"?" active":"")+"' data-filter='semua' onclick='setFilter(\"semua\")'>Semua</button>";
+  var html = "<button class='filter-btn"+(filterAktif==="semua"?" active":"")+"' onclick='setFilter(\"semua\")'>Semua</button>";
   jenisList.forEach(function(j) {
     var c = getWarnaJenis(j);
-    html += "<button class='filter-btn"+(filterAktif===j?" active":"")+"' data-filter='"+j+"' onclick='setFilter(\""+j+"\")' style='"+(filterAktif===j?"background:"+c+";border-color:"+c+";color:#fff":"")+"'>"+j+"</button>";
+    html += "<button class='filter-btn"+(filterAktif===j?" active":"")+"' onclick='setFilter(\""+j+"\")' style='"+(filterAktif===j?"background:"+c+";border-color:"+c+";color:#fff":"")+"'>"+j+"</button>";
   });
   document.getElementById("filterRow").innerHTML = html;
-
-  // Legend
   var legendHtml = "";
   jenisList.forEach(function(j) {
     var c = getWarnaJenis(j);
@@ -312,73 +361,69 @@ function renderFilter() {
   document.getElementById("legendItems").innerHTML = legendHtml || "<div style='font-size:11px;color:#aaa'>Belum ada data</div>";
 }
 
-function setFilter(f) {
-  filterAktif = f;
-  renderFilter();
-  renderSidebar();
-}
+function setFilter(f) { filterAktif = f; renderFilter(); renderSidebar(); }
 
-// STATS
-function updateStats() {
-  document.getElementById("count-total").textContent = dataDifabel.length;
-}
+function updateStats() { document.getElementById("count-total").textContent = dataDifabel.length; }
 
-// LOAD DARI SHEETS
+// LOAD
 function loadDariSheets() {
   var list = document.getElementById("sidebarList");
-  list.innerHTML = "<div class='empty-state'><div class='emoji'>⏳</div>Memuat data dari Google Sheets...</div>";
-
+  list.innerHTML = "<div class='empty-state'><div class='emoji'>⏳</div>Memuat data...</div>";
   fetch(SHEETS_URL)
     .then(function(r){ return r.text(); })
     .then(function(csv) {
       dataDifabel = parseCSV(csv);
       warnaJenis = {}; warnaIdx = 0;
-
       Object.keys(markers).forEach(function(k){ map.removeLayer(markers[k]); });
       markers = {};
-
       dataDifabel.forEach(function(d){ tambahMarker(d); });
-
       var valid = dataDifabel.filter(function(d){ return d.lat && d.lng; });
       if(valid.length > 0) {
         var cLat = valid.reduce(function(s,d){return s+d.lat;},0)/valid.length;
         var cLng = valid.reduce(function(s,d){return s+d.lng;},0)/valid.length;
         map.setView([cLat, cLng], 16, {animate:true});
       }
-
-      updateStats();
-      renderFilter();
-      renderSidebar();
-      tampilToast("✅ Data berhasil dimuat — "+dataDifabel.length+" orang");
+      updateStats(); renderFilter(); renderSidebar();
+      tampilToast("✅ Data dimuat — "+dataDifabel.length+" orang");
     })
     .catch(function(err) {
-      list.innerHTML = "<div class='empty-state'><div class='emoji'>❌</div>Gagal memuat data. Periksa koneksi internet.</div>";
-      console.error(err);
+      list.innerHTML = "<div class='empty-state'><div class='emoji'>❌</div>Gagal memuat data.</div>";
     });
 }
 
 // SEARCH
-document.getElementById("searchInput").addEventListener("input", function(e) {
-  searchQuery = e.target.value;
-  renderSidebar();
-});
+document.getElementById("searchInput").addEventListener("input", function(e) { searchQuery = e.target.value; renderSidebar(); });
 
 // TOAST
 function tampilToast(msg) {
   var t = document.getElementById("toast");
-  t.textContent = msg;
-  t.classList.add("show");
+  t.textContent = msg; t.classList.add("show");
   setTimeout(function(){ t.classList.remove("show"); }, 2500);
 }
 
+// TOGGLE SIDEBAR DESKTOP
 function toggleSidebar() {
-  var sidebar = document.querySelector(".sidebar");
+  var sidebar = document.getElementById("sidebar");
   var btn = document.getElementById("btnToggle");
   sidebar.classList.toggle("hidden");
   btn.textContent = sidebar.classList.contains("hidden") ? "▶" : "◀";
   setTimeout(function(){ map.invalidateSize(); }, 300);
 }
 
+// TOGGLE SIDEBAR MOBILE
+function toggleMobileSidebar(forceClose) {
+  var sidebar = document.getElementById("sidebar");
+  var overlay = document.getElementById("sidebarOverlay");
+  var isOpen = sidebar.classList.contains("mobile-open");
+  if(forceClose === false || isOpen) {
+    sidebar.classList.remove("mobile-open");
+    overlay.classList.remove("show");
+  } else {
+    sidebar.classList.add("mobile-open");
+    overlay.classList.add("show");
+  }
+  setTimeout(function(){ map.invalidateSize(); }, 300);
+}
 
 // INIT
 loadDariSheets();
