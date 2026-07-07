@@ -227,12 +227,16 @@ function buatIcon(jenis) {
 
 function buatPopup(d) {
   var emoji = getEmoji(d.jenis);
+  var gmapsUrl = "https://www.google.com/maps?q="+d.lat+","+d.lng;
   return "<div class='popup-wrap'>"
     +"<div class='popup-header'><div class='popup-avatar'>"+emoji+"</div>"
     +"<div><div class='popup-nama'>"+d.nama+"</div>"
     +"<div class='popup-sub'>"+d.jenis+"</div></div></div>"
     +"<div class='popup-row'><span class='popup-label'>Alamat</span><span class='popup-val'>"+d.alamat+"</span></div>"
     +"<div class='popup-row'><span class='popup-label'>Jenis Difabel</span><span class='popup-val'>"+d.jenis+"</span></div>"
+    +"<div style='margin-top:8px;text-align:center'>"
+    +"<a href='"+gmapsUrl+"' target='_blank' style='display:inline-block;padding:6px 14px;background:#1a5276;color:#fff;border-radius:6px;font-size:12px;text-decoration:none;font-weight:600'>📍 Buka di Google Maps</a>"
+    +"</div>"
     +"</div>";
 }
 
