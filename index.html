@@ -25,6 +25,8 @@ header p { font-size:11px; opacity:0.75; margin-top:1px; }
 .layer-toggle { display:flex; gap:4px; background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.2); border-radius:8px; padding:3px; }
 .layer-btn { padding:3px 10px; border-radius:6px; border:none; font-size:11px; cursor:pointer; color:rgba(255,255,255,0.7); background:transparent; transition:all 0.15s; font-weight:500; }
 .layer-btn.active { background:#fff; color:#1a5276; font-weight:700; }
+.sidebar.hidden { display:none; }
+.btn-toggle-sidebar { position:absolute; top:10px; left:10px; z-index:1000; background:#1a5276; color:#fff; border:none; border-radius:8px; padding:7px 10px; cursor:pointer; font-size:14px; box-shadow:0 2px 8px rgba(0,0,0,0.3); }
 
 .main { display:flex; flex:1; overflow:hidden; }
 .sidebar { width:320px; background:#fff; border-right:1px solid #d0dce8; display:flex; flex-direction:column; flex-shrink:0; overflow:hidden; }
@@ -103,6 +105,7 @@ header p { font-size:11px; opacity:0.75; margin-top:1px; }
   </div>
 
   <div style="position:relative;flex:1;">
+      <button class="btn-toggle-sidebar" id="btnToggle" onclick="toggleSidebar()" title="Sembunyikan/Tampilkan Sidebar">◀</button>
     <div id="map"></div>
     <div class="legend" id="legend">
       <div class="legend-title">Jenis Difabel</div>
@@ -367,6 +370,13 @@ function tampilToast(msg) {
   setTimeout(function(){ t.classList.remove("show"); }, 2500);
 }
 
+function toggleSidebar() {
+  var sidebar = document.querySelector(".sidebar");
+  var btn = document.getElementById("btnToggle");
+  sidebar.classList.toggle("hidden");
+  btn.textContent = sidebar.classList.contains("hidden") ? "▶" : "◀";
+  setTimeout(function(){ map.invalidateSize(); }, 300);
+}
 
 
 // INIT
